@@ -5,7 +5,7 @@ pushd %~dp0
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=blender --background --python "full\path\to\resources\documentation_config\build_sphinx_blender_doc.py"
+	set SPHINXBUILD=blender --background --python "full/path/to/resources/documentation_config/build_sphinx_blender_doc.py"
 )
 set SOURCEDIR=source
 set BUILDDIR=build

@@ -1,7 +1,7 @@
 import bpy
 import blf
 import gpu
-from bgl import *
+# from bgl import *
 from gpu_extras.batch import batch_for_shader
 
 
