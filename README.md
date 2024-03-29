@@ -120,14 +120,14 @@ For the documentation generation to work as expected, it is necessary to do the 
 #### 1. Edit the environment variables
 Add the path to the `blender.exe` to the system variables. The default path is
 ```
-C:\Program Files\Blender Foundation\Blender 4.0\blender.exe
+C:\Program Files\Blender Foundation\Blender 4.0\
 ```
 Move it tho the top (or near the top) of the list.
 
 #### 2. Edit the make.bat file
 Make a copy of `<project_root>/docs/sphinx/make_example.bat` and rename the copy to `make.bat`. This is necessary because of Git source control.
 
-Sphinx will be configured to use the Blender interpreter (`blender.exe`) instead of the interpreter in the virtual environment.
+Sphinx will be configured to use the Blender's interpreter (`blender.exe`) instead of the interpreter in the virtual environment.
 
 `sphinx-quickstart` creates two important files (they are inside the `<project_root>/docs/sphinx` folder):
 
@@ -165,7 +165,7 @@ The result is the same on all terminals:
 
 - The Python executable is the one inside the py310env.
 
-- That interpreter does not know anything about any Blender module. So, it fails to import them.
+- That interpreter does not know anything about any Blender modules. So, it fails to import them.
 
 
 
