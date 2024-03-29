@@ -1,11 +1,23 @@
-# A link to this folder ("E:\HDD_4TB\cloud\Videoaulas\Udemy - Blender Python Addon Development with ST3\blender-addon-gemini\Gemini")
-# should be created at "C:\Users\<USERNAME>\AppData\Roaming\Blender Foundation\Blender\4.0\scripts\addons"
-# with the same name (Gemini).
-# The link will not work though. After using the extension (Blender Development)
-# another link will be created and the first one can be deleted.
-# Fake Blender Python API module collection: fake-bpy-module
-# https://github.com/nutti/fake-bpy-module
+"""Entry point of this addon.
 
+Note:
+    A link to the folder (``<project_root>\Gemini``)
+    should be created at ``C:\\Users\\<USERNAME>\\AppData\\Roaming\\Blender Foundation\\Blender\\4.0\\scripts\\addons``
+    with the same name (Gemini).
+
+    The link will not work though. After using the extension (Blender Development)
+    another link will be created and the first one can be deleted.
+
+Warning:
+    It is a good idea to install ``fake-bpy-module-latest`` to avoid import
+    warnings in the editor.
+
+References:
+    `Fake Blender Python API module collection: fake-bpy-module`_
+
+.. _Fake Blender Python API module collection\: fake-bpy-module:
+   https://chadrick-kwag.net/sphinx-apidoc-ignoring-some-modules-packages/
+"""
 
 bl_info = {
     "name": "Gemini",
