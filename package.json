@@ -15,6 +15,7 @@
         "update:make_bat": "bash ./scripts/update_make_bat.sh",
 
         "build:source:doc": "sphinx-apidoc --force -o ./docs/sphinx/source ./Gemini",
+        "build:doc": "bash ./scripts/build_doc.sh",
         "server:doc": "npx live-server ./docs/sphinx/build/html --no-css-inject --port=8080 --wait=5000"
     },
     "devDependencies": {
