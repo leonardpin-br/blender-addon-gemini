@@ -5,8 +5,8 @@ Note:
     should be created at ``C:\\Users\\<USERNAME>\\AppData\\Roaming\\Blender Foundation\\Blender\\4.0\\scripts\\addons``
     with the same name (Gemini).
 
-    The link will not work though. After using the extension (Blender Development)
-    another link will be created and the first one can be deleted.
+    The link will not work though. After using the VSCODE extension (Blender
+    Development) another link will be created and the first one can be deleted.
 
 Warning:
     It is a good idea to install ``fake-bpy-module-latest`` to avoid import
@@ -16,7 +16,7 @@ References:
     `Fake Blender Python API module collection: fake-bpy-module`_
 
 .. _Fake Blender Python API module collection\: fake-bpy-module:
-   https://chadrick-kwag.net/sphinx-apidoc-ignoring-some-modules-packages/
+   https://github.com/nutti/fake-bpy-module
 """
 
 bl_info = {
