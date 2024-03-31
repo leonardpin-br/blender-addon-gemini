@@ -40,7 +40,10 @@ the link in the appropriate folder connecting the addon to Blender.
 If you do not use VSCODE, you can try to create a link to the addon folder
 (``<project_root>\Gemini``) at
 ``C:\Users\<USERNAME>\AppData\Roaming\Blender Foundation\Blender\4.0\scripts\addons``
-with the same name of this addon (Gemini).
+with the same name of this addon (Gemini):
+```
+mklink /D "C:\Users\<USERNAME>\AppData\Roaming\Blender Foundation\Blender\4.0\scripts\addons\Gemini" "full\path\to\blender-addon-gemini\Gemini"
+```
 
 In my tests, it did not work though. Using the extension is the preferred way
 to go.
@@ -69,6 +72,7 @@ This starter kit allows the development of a more powerfull tool. Instead of cre
     is preconfigured.
     3. Line endings are preconfigured.
     4. BASH scripts to facilitate the setup.
+    5. A file containing a tutorial about how to configure Sphinx.
 
 
 
