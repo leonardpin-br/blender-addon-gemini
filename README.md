@@ -32,12 +32,29 @@ The BASH script (``.sh``) files should have LF (Unix) line endings even if you a
 
 The provided ``.gitattributes`` file has a configuration that should work without problems (Reference: [Configuring Git to handle line endings](https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings)).
 
+### Visual Studio Code Extension
+If you use Visual Studio Code, install the **Blender Development** or
+**Blender Development [Experimental Fork]**. It will automatically create
+the link in the appropriate folder connecting the addon to Blender.
+
+If you do not use VSCODE, you can try to create a link to the addon folder
+(``<project_root>\Gemini``) at
+``C:\Users\<USERNAME>\AppData\Roaming\Blender Foundation\Blender\4.0\scripts\addons``
+with the same name of this addon (Gemini).
+
+In my tests, it did not work though. Using the extension is the preferred way
+to go.
+
+### Python module
+It is a good idea to install ``fake-bpy-module-latest`` to avoid import
+warnings in the editor.
+
 
 
 ## Inspirations and reference
 This kit is based on the course
 [Blender 2.9 Addon Development With Python](https://www.udemy.com/course/st3-addon-course/)
-taught by ST3 (>O.o)>.
+taught by **ST3 (>O.o)>**.
 
 
 
@@ -51,6 +68,7 @@ This starter kit allows the development of a more powerfull tool. Instead of cre
     2. The code is heavly documented (using Sphinx and Google style docstrings) and HTML generation
     is preconfigured.
     3. Line endings are preconfigured.
+    4. BASH scripts to facilitate the setup.
 
 
 
@@ -191,11 +209,3 @@ The result is the same on all terminals:
 
 ## Which file will be executed?
 No Python files in this project should be executed directly.
-
-A link to the `<project_root>\Gemini` folder should be created at
-`C:\Users\<USERNAME>\AppData\Roaming\Blender Foundation\Blender\4.0\scripts\addons`
-with the same name (Gemini).
-
-The link will not work though. After using the VSCODE extension (Blender
-Development) another link will be created and the first one can be deleted.
-
