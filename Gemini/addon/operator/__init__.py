@@ -1,6 +1,6 @@
-"""Last modified in 2024-03-12
+"""For Blender to be able to find the classes, the must be registered.
 
-Python version 3.10.13 (Blender 4.0.2)
+Thes ``__init__.py`` file registers all the operators in this module folder.
 
 References:
     `"Installing" bpy for Plugin Development in VSCode`_
@@ -24,12 +24,18 @@ classes = (
 
 
 def register_operators():
+    """Registers all classes in this module folder.
+    """
+
     from bpy.utils import register_class
     for cls in classes:
         register_class(cls)
 
 
 def unregister_operators():
+    """Unregister all the classes in this module folder in reverse order.
+    """
+
     from bpy.utils import unregister_class
     for cls in reversed(classes):
         unregister_class(cls)

@@ -1,3 +1,6 @@
+"""Creates a ring of lights in the scene.
+
+"""
 
 import math
 
@@ -6,11 +9,22 @@ from bpy.props import IntProperty, FloatProperty
 
 
 class GEM_OP_Add_Lights(bpy.types.Operator):
-    """Adds lights to the scene."""
+    """Adds lights to the scene.
+
+    This is a standard operator, not a modal one.
+
+    """
 
     bl_idname = "gem.add_lights"
+    """str: ``gem`` works as a category"""
+
     bl_label = "Add Lights"
+    """str: Name that can be searched for in the Blender interface, and shows up
+    as a button.
+    """
+
     bl_options = {'REGISTER', 'UNDO'}
+    """set: Allows to press CTRL+Z and undo what this operator has done."""
 
     radius: FloatProperty(name="Radius", default=5, min=1, max=100)
     count: IntProperty(name="Light Count", default=5, min=3, max=50)
