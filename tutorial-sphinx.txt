@@ -126,11 +126,11 @@ Sphinx - 2: Editing the configuration files
 Editing the file ./docs/sphinx/source/conf.py
     https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#confval-autodoc_mock_imports
 --------------------------------------------------------------------------------
-# Uncomment
+# Uncomment or add the lines below:
 	import os
 	import sys
 
-sys.path.insert(0, os.path.abspath('../../../src')) <= From . to ../../../src
+sys.path.insert(0, os.path.abspath('../../../')) # <= From . to ../../../
 
 extensions = [
     'sphinx.ext.napoleon',
@@ -138,13 +138,17 @@ extensions = [
     'sphinx.ext.autodoc'
 ]
 
-autodoc_mock_imports = [    <= Auto mock in the conf.py file.
-    # 'maya',
-    # 'pymel',
-    # 'PySide2'
+autodoc_mock_imports = [    # <= Auto mock in the conf.py file.
+    'bgl',
+    'blf',
+    'bpy',
+    'bpy_extras',
+    'gpu',
+    'gpu_extras',
+    'mathutils'
 ]
 
-master_doc = 'index'    <= Added
+master_doc = 'index'    # <= Added
 
 html_theme = 'sphinx_rtd_theme'
 
@@ -175,7 +179,7 @@ Editing the file ./docs/sphinx/source/index.rst
    :maxdepth: 2
    :caption: Contents:
 
-   modules		<= Name inserted (3 spaces indentation).
+   modules		# <= Name inserted (3 spaces indentation).
 
 
 
@@ -189,133 +193,7 @@ cd ./docs/sphinx; make html; cd ..; cd ..;
 
 Important to know
 --------------------------------------------------------------------------------
-The src folder MUST NOT have the __init__.py file, that is, must not be a
-package, bacause Sphinx shows an error and does not create the documentation.
 
-The subfolders inside the src folder must have the __init__.py file, that is,
-the subfolders must be packages.
-
-The Maya modules can be 'mocked' (for Sphinx) importing the mock module (not a
+The Blender modules can be 'mocked' (for Sphinx) importing the mock module (not a
 good idea) or adding the autodoc_mock_imports list to the conf.py file
 (preferred).
-
-The tests folder will not be documented.
-
-
-
-
-UNIT TESTS
-================================================================================
-================================================================================
-
-
-Coverage folder structure (inside docs)
---------------------------------------------------------------------------------
-
-<project_root_folder>
-├── docs
-│   ├── coverage
-│   │   └── htmlcov
-├── sphinx (subfolders were omitted in this structure)
-
-
-Installation of mock package inside the virtual environment
---------------------------------------------------------------------------------
-
-# Necessary for running unit tests.
-pip install mock
-
-
-Code inside the unit tests modules
-    https://stackoverflow.com/questions/8658043/how-to-mock-an-import
---------------------------------------------------------------------------------
-
-import os
-import sys
-import unittest     <= (It is not necessary for documentation, but it's essential to unittest in the test_main.py file)
-import mock         <= (It is not necessary for documentation, but it's essential to unittest in the test_main.py file)
-
-# Autodesk Maya modules that need to be mocked:
-maya_modules = [
-    'maya',
-    'maya.app',
-    'maya.app.general',
-    'maya.app.general.mayaMixin',
-    'cmds',
-    'mel',
-    'pymel',
-    'pymel.core'
-    'MayaQWidgetBaseMixin',
-    'MayaQWidgetDockableMixin',
-    'PySide2',
-    'PySide2.QtUiTools',
-    'QtWidgets',
-    'QUiLoader'
-]
-
-# Creates a mock for every module in the maya_modules list.
-for mod in maya_modules:
-    sys.modules[mod] = mock.MagicMock()     <= (It is not necessary for documentation, but it's essential to unittest in the test_main.py file)
-
-# Adds the boilerplate folder to sys.path, if it not already there,
-# so unit tests can see the modules:
-tests_dir = os.path.dirname(os.path.realpath(__file__))     # tests
-root_dir = os.path.dirname(tests_dir)                       # <root_directory>
-src_dir = os.path.join(root_dir, "src")
-
-for path in sys.path:
-    if path == src_dir:
-        break
-else:
-    sys.path.append(src_dir)
-
-# Imports the <root_directory>/src/main.py module.
-import main
-
-
-Important to know
---------------------------------------------------------------------------------
-The __init__.py files were omitted from coverage reports (.coveragerc).
-
-The tests folder and the subfolders MUST be packages (have __init__.py in them)
-for unittest to work.
-
-To avoid execution (and unavoidable failure) of Maya modules, it is necessary to
-mock those modules. This technique is commonly used in unit testing.
-
-
-
-
-REFERENCES (teste)
-================================================================================
-================================================================================
-
-
-Main reference for this tutorial
-Learn Sphinx python documentation | Episode 01.
-https://www.youtube.com/watch?v=fX07G5eUSsY
---------------------------------------------------------------------------------
-
-
-How to make a folder clean with PowerShell
-	How Can I Delete a File or Folder from the Command Line Using Windows PowerShell?
-	https://petri.com/delete-folder-file-from-command-line-powershell/
---------------------------------------------------------------------------------
-
-Remove-Item -Path ./docs/* -Recurse -Force
-
-
-
-
-COMPILING .ui to .py
-================================================================================
-================================================================================
-
-"C:\Program Files\Autodesk\Maya2020\bin" must be added to environment variables.
-
-Using the Qt for Python (VSCODE extension), the compiled resource file must
-have the _rc.py suffix. The .py compiled from the .ui will import the the
-compiled resource file with the _rc as the last line of the file.
---------------------------------------------------------------------------------
-
-mayapy "C:\Program Files\Autodesk\Maya2020\bin\pyside2-uic" "E:\cloud\Backup\Libraries\scripts\maya\python-maya-boilerplate\resources\ui\maya_ui_template.ui" -o "E:\cloud\Backup\Libraries\scripts\maya\python-maya-boilerplate\src\userinterface\maya_ui_template_ui.py"
