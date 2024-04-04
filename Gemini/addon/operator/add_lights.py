@@ -36,6 +36,15 @@ class GEM_OP_Add_Lights(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
     def draw(self, context):
+        """Creates the panel that will appear in the interface during the use
+        of the operator.
+
+        Args:
+            context (bpy.context): This parameter gives the option,
+                for example, to get a reference to the selected object. This
+                parameter is madatory even when it is not used like in this
+                method.
+        """
         # print("draw...")
         layout = self.layout
 
@@ -45,6 +54,18 @@ class GEM_OP_Add_Lights(bpy.types.Operator):
         layout.prop(self, 'z')
 
     def execute(self, context):
+        """Executes, automatically (without being called in this code) the
+        creation of lights.
+
+        Args:
+            context (bpy.context): This parameter gives the option,
+                for example, to get a reference to the selected object. This
+                parameter is madatory even when it is not used like in this
+                method.
+
+        Returns:
+            set: Contains only one string equals to 'FINISHED'.
+        """
         objs = []
 
         for i in range(self.count):
