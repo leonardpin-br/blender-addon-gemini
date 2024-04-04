@@ -1,12 +1,7 @@
-"""Last modified in 2024-03-13
+"""For Blender to be able to find the classes, they must be registered.
 
-Python version 3.10.13 (Blender 4.0.2)
-
-References:
-    `"Installing" bpy for Plugin Development in VSCode`_
-
-.. _"Installing" bpy for Plugin Development in VSCode:
-   https://blender.stackexchange.com/a/284197
+The ``__init__.py`` file registers locally all the menus in this module
+folder.
 
 """
 

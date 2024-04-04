@@ -25,8 +25,12 @@ Warning:
 References:
     `Fake Blender Python API module collection: fake-bpy-module`_
 
+    `"Installing" bpy for Plugin Development in VSCode`_
+
 .. _Fake Blender Python API module collection\: fake-bpy-module:
    https://github.com/nutti/fake-bpy-module
+.. _"Installing" bpy for Plugin Development in VSCode:
+   https://blender.stackexchange.com/a/284197
 """
 
 bl_info = {

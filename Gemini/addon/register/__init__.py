@@ -1,3 +1,10 @@
+"""This module has the functions to register the other modules.
+
+The registration happens in cascade. The ``__init__.py`` files in other modules
+(folders) register each file inside them.
+"""
+
+
 def register_addon():
 
     # Properties

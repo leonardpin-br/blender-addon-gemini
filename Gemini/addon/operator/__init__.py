@@ -1,12 +1,7 @@
-"""For Blender to be able to find the classes, the must be registered.
+"""For Blender to be able to find the classes, they must be registered.
 
-This ``__init__.py`` file registers all the operators in this module folder.
-
-References:
-    `"Installing" bpy for Plugin Development in VSCode`_
-
-.. _"Installing" bpy for Plugin Development in VSCode:
-   https://blender.stackexchange.com/a/284197
+The ``__init__.py`` file registers locally all the operators in this module
+folder.
 
 """
 

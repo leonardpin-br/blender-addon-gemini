@@ -1,3 +1,10 @@
+"""For Blender to be able to find the classes, they must be registered.
+
+The ``__init__.py`` file registers locally all the properties in this module
+folder.
+
+"""
+
 import bpy
 
 from . addon import GEM_Props
