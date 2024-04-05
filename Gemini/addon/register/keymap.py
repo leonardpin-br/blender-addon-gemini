@@ -1,9 +1,15 @@
+"""Sets the hotkey to be used to invoke this add-on."""
+
 import bpy
 
 keys = []
+"""list: When Blender loads up, it will load the keys inside this list.
+"""
 
 
 def register_keymap():
+    """Adds the keys to the ``keys`` list.
+    """
 
     wm = bpy.context.window_manager
     addon_keyconfig = wm.keyconfigs.addon
@@ -17,6 +23,10 @@ def register_keymap():
 
 
 def unregister_keymap():
+    """If, at some point, the add-on is uninstalled, the keys are removed by
+    this function.
+
+    """
 
     for km, kmi in keys:
         km.keymap_items.remove(kmi)

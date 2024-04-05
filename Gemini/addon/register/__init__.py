@@ -1,11 +1,16 @@
-"""This module has the functions to register the other modules.
+"""This module has the functions to register the other modules (folders).
+
+This ``__init__.py`` represents the second phase of the registration initiated
+in the ``<project_root>/Gemini/__init__.py`` file.
 
 The registration happens in cascade. The ``__init__.py`` files in other modules
-(folders) register each file inside them.
+(folders) register each file inside the respective folder.
+
 """
 
 
 def register_addon():
+    """Registers each module folder."""
 
     # Properties
     from .. property import register_properties
@@ -25,6 +30,7 @@ def register_addon():
 
 
 def unregister_addon():
+    """Unregisters each module folder."""
 
     # Properties
     from .. property import unregister_properties

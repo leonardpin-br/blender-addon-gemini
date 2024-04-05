@@ -16,7 +16,7 @@ class GEM_OP_Add_Lights(bpy.types.Operator):
     """
 
     bl_idname = "gem.add_lights"
-    """str: ``gem`` works as a category"""
+    """str: ``gem`` works as a category."""
 
     bl_label = "Add Lights"
     """str: Name that can be searched for in the Blender interface, and shows up
