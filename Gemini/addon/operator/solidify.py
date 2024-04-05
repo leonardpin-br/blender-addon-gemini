@@ -1,3 +1,7 @@
+"""Adds the Solidify modifier to the selected object.
+
+"""
+
 import bpy
 import traceback
 from .. utility.mouse import mouse_warp
@@ -6,13 +10,50 @@ from .. utility.addon import get_prefs
 
 
 class GEM_OP_Solidify(bpy.types.Operator):
+    """This class creates a modal.
+
+    This is different from a standard operator. A modal is interactive, that is,
+    the user can move the mouse cursor and it affects the result in the
+    viewport.
+
+    """
+
     bl_idname = "gem.solidify"
+    """str: ``gem`` works as a category or a namespace."""
+
     bl_label = "Solidify"
+    """str: Name that can be searched for in the Blender interface, and shows up
+    as a button, if the ``text=`` parameter (of ``self.layout.operator()``) is
+    not given in the ``main_menu.py`` module.
+    """
+
     bl_description = "Solidify Modal"
+    """str: Appears when the user hover over a button. Acts as a tooltip."""
+
     bl_options = {"REGISTER", "UNDO", "BLOCKING"}
+    """str: Allows to press CTRL+Z and undo what has just been done."""
 
     @classmethod
     def poll(cls, context):
+        """This is going to be run before any instance of this class is made.
+
+        It makes sure the operator returns True or False and can run.
+
+        It is advisable to keep the method lite and not do any heavy
+        operations inside it.
+
+        Warning:
+            This method has to be called ``poll``.
+
+        Args:
+            context (bpy.context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+
+        Returns:
+            bool: True if there is a mesh object selected, False otherwise.
+
+        """
+
         if context.active_object != None:
             if context.active_object.type == 'MESH':
                 return True
