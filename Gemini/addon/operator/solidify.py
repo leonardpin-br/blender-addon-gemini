@@ -52,6 +52,16 @@ class GEM_OP_Solidify(bpy.types.Operator):
         Returns:
             bool: True if there is a mesh object selected, False otherwise.
 
+        References:
+            `classmethod poll(context)`_
+
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _classmethod poll(context):
+           https://docs.blender.org/api/current/bpy.types.Operator.html#bpy.types.Operator.poll
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
         """
 
         if context.active_object != None:
@@ -60,6 +70,30 @@ class GEM_OP_Solidify(bpy.types.Operator):
             return False
 
     def invoke(self, context, event):
+        """First method to run when an instance of this class is made.
+
+        Warning:
+            This method has to be called ``invoke``.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+            event (bpy.types.Event): Window Manager Event.
+
+        Returns:
+            set: Set containing only one string equals to "RUNNING_MODAL".
+
+        References:
+            `invoke(context, event)`_
+
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _invoke(context, event):
+           https://docs.blender.org/api/current/bpy.types.Operator.html#bpy.types.Operator.invoke
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
+        """
 
         # Props
         self.created_modifier = False
@@ -77,6 +111,16 @@ class GEM_OP_Solidify(bpy.types.Operator):
         return {"RUNNING_MODAL"}
 
     def setup(self, context):
+        """Checks if there is a solidify modifier already there. If there is
+        not, creates one.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object. This
+                parameter is madatory even when it is not used like in this
+                method.
+        """
+
         for mod in self.obj.modifiers:
             if mod.type == 'SOLIDIFY':
                 self.modifier = mod
@@ -89,6 +133,32 @@ class GEM_OP_Solidify(bpy.types.Operator):
         self.original_thickness = self.modifier.thickness
 
     def modal(self, context, event):
+        """Runs after the ``invoke()`` method when an instance of this class is
+        made. It will run until it is finished.
+
+        Warning:
+            This method has to be called ``modal``.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+            event (bpy.types.Event): Window Manager Event.
+
+        Returns:
+            set: Only one of the following possible strings:
+            'PASS_THROUGH', 'FINISHED', 'CANCELLED' and 'RUNNING_MODAL'.
+
+        References:
+            `invoke(context, event)`_
+
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _invoke(context, event):
+           https://docs.blender.org/api/current/bpy.types.Operator.html#bpy.types.Operator.invoke
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
+        """
 
         # Utils
         mouse_warp(context, event)
