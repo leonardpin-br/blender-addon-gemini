@@ -1,8 +1,23 @@
 PADDING = 80
+"""int: Distance (inside Blender' screen) from the edge. When the mouse cursor
+is below that distance, it will warp, that is, appear at the other side of the
+screen.
+
+"""
 
 
 def mouse_warp(context, event):
-    '''Warp the mouse in the screen region.'''
+    """Warp the mouse in the screen region.
+
+    This function is preferable to the Blender's warp because this one allows
+    navigation during the use of the operator.
+
+    Args:
+        context (bpy.types.Context): This parameter gives the option,
+            for example, to get a reference to the selected object.
+        event (bpy.types.Event): Window Manager Event.
+
+    """
 
     mouse_pos = (event.mouse_region_x, event.mouse_region_y)
     x_pos = mouse_pos[0]
