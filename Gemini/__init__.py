@@ -43,7 +43,7 @@ bl_info = {
     "blender": (4, 0, 2)
 }
 """dict: Holds the information tha will be displayed in the Blender interface.
-
+It can be found at
 ``(Menu) Edit > Preferences > Add-ons > Community > 3D View: Gemini``
 """
 

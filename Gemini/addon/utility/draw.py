@@ -6,22 +6,25 @@ from gpu_extras.batch import batch_for_shader
 
 
 def draw_quad(vertices=[], color=(1, 1, 1, 1)):
-    """Vertices = Top Left, Bottom Left, Top Right, Bottom Right
+    """Draws (renders on the Blender screen) the background for the text.
 
     Args:
-        vertices (list, optional): _description_. Defaults to [].
-        color (tuple, optional): _description_. Defaults to (1, 1, 1, 1).
+        vertices (list, optional): Vertices = Top Left, Bottom Left, Top Right,
+            Bottom Right. Defaults to [].
+        color (tuple, optional): The color of the background for the text.
+            Defaults to (1, 1, 1, 1).
 
     Raises:
-        ValueError: If `2D_UNIFORM_COLOR` is used as argument for
-            `gpu.shader.from_builtin()`
-        TypeError: If `glEnable(GL_BLEND)` and `glDisable(GL_BLEND)` are called.
+        ValueError: If ``2D_UNIFORM_COLOR`` is used as argument for
+            ``gpu.shader.from_builtin()``
+        TypeError: If ``glEnable(GL_BLEND)`` and ``glDisable(GL_BLEND)`` are called.
 
     References:
         `OpenGL Wrapper (bgl)`_
 
     .. _OpenGL Wrapper (bgl):
        https://docs.blender.org/api/current/bgl.html#module-bgl
+
     """
 
     indices = [(0, 1, 2), (1, 2, 3)]
@@ -43,14 +46,14 @@ def draw_text(text, x, y, size=12, color=(1, 1, 1, 1)):
     """Draws the text inside the box.
 
     Args:
-        text (_type_): _description_
-        x (_type_): _description_
-        y (_type_): _description_
-        size (int, optional): _description_. Defaults to 12.
-        color (tuple, optional): _description_. Defaults to (1, 1, 1, 1).
+        text (str): The text to be drawn (rendered) on the Blender screen.
+        x (int): The **x** position.
+        y (int): The **y** position.
+        size (int, optional): The font size. Defaults to 12.
+        color (tuple, optional): The color of the font. Defaults to (1, 1, 1, 1).
 
     Raises:
-        TypeError: If `blf.size()` is called with 3 arguments.
+        TypeError: If ``blf.size()`` is called with 3 arguments.
 
     References:
         `Font Drawing (blf)`_
@@ -59,7 +62,9 @@ def draw_text(text, x, y, size=12, color=(1, 1, 1, 1)):
        https://docs.blender.org/api/current/blf.html#module-blf
     """
 
-    dpi = bpy.context.preferences.system.dpi
+    # dpi = bpy.context.preferences.system.dpi  # Unnecessary
+
+    # In Blender, fonts are indexed.
     font = 0
     # blf.size(font, size, int(dpi))    # TypeError: blf.size() takes exactly 2 arguments (3 given)
     blf.size(font, size)
@@ -69,18 +74,27 @@ def draw_text(text, x, y, size=12, color=(1, 1, 1, 1)):
 
 
 def get_blf_text_dims(text, size):
-    '''Return the total width of the string
+    """Return the total width of the string.
+
+    Args:
+        text (str): The text to be drawn (rendered) on the Blender screen.
+        size (int): The font size.
+
+    Returns:
+        tuple: The width and height of the text.
 
     Raises:
-        TypeError: If `blf.size()` is called with 3 arguments.
+        TypeError: If ``blf.size()`` is called with 3 arguments.
 
     References:
         `Font Drawing (blf)`_
 
     .. _Font Drawing (blf):
-       https://docs.blender.org/api/current/blf.html#module-blf'''
+       https://docs.blender.org/api/current/blf.html#module-blf
 
-    dpi = bpy.context.preferences.system.dpi
+    """
+
+    # dpi = bpy.context.preferences.system.dpi  # Unnecessary
     # blf.size(0, size, dpi)    # TypeError: blf.size() takes exactly 2 arguments (3 given)
     blf.size(0, size)
     return blf.dimensions(0, str(text))

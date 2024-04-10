@@ -189,7 +189,12 @@ class GEM_OP_Solidify(bpy.types.Operator):
         return {"RUNNING_MODAL"}
 
     def remove_shaders(self, context):
-        '''Remove shader handle.'''
+        """Remove shader handle.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         if self.draw_handle != None:
             self.draw_handle = bpy.types.SpaceView3D.draw_handler_remove(
@@ -197,6 +202,13 @@ class GEM_OP_Solidify(bpy.types.Operator):
             context.area.tag_redraw()
 
     def safe_draw_shader_2d(self, context):
+        """Avoids having the text stuck in the viewport in case of an error in
+        the ``draw_shaders_2d()`` method.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         try:
             self.draw_shaders_2d(context)
@@ -206,6 +218,22 @@ class GEM_OP_Solidify(bpy.types.Operator):
             self.remove_shaders(context)
 
     def draw_shaders_2d(self, context):
+        """Draws the shaders in 2D in the Blender interface.
+
+        When drawing text in the Bleder screen, it is necessary to draw the
+        rectangle in the background first and then the text inside it.
+
+        In order to render the background, it is necessary to know the
+        dimensions of the text. Some padding is going to be added to the width
+        and height of the text.
+
+        So, first we get the dimensions of the text, then we draw the background
+        and then the text inside that background.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         prefs = get_prefs()
 
