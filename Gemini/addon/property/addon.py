@@ -7,10 +7,13 @@ from . settings import GEM_Settings, draw_settings
 
 
 class GEM_Props(bpy.types.AddonPreferences):
+    """Class responsible for creating the preferences of this add-on in the
+    Blender interface.
+    """
 
     bl_idname = addon_name
 
-    # Property Groups
+    # Property Groups (Pointer Property)
     color: PointerProperty(type=GEM_Color)
     settings: PointerProperty(type=GEM_Settings)
 

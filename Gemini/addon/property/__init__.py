@@ -3,6 +3,8 @@
 The ``__init__.py`` file registers locally all the properties in this module
 folder.
 
+The ``GEM_Color`` class should be registered first (before the ``GEM_Props``),
+because the ``GEM_Props`` is dependent on the ``GEM_Color``.
 """
 
 import bpy
