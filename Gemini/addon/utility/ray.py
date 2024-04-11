@@ -8,13 +8,24 @@ def mouse_raycast_to_plane(mouse_pos, context, point, normal):
     """Get 3D point on plane from mouse.
 
     Args:
-        mouse_pos (tuple): _description_
-        context (bpy.context): _description_
-        point (Vector): The planes origin.
-        normal (Vector): The planes direction.
+        mouse_pos (tuple): (``bpy.types.Event.mouse_region_x``, ``bpy.types.Event.mouse_region_y``)
+        context (bpy.context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        point (mathutils.Vector): The planes origin.
+        normal (mathutils.Vector): The planes direction.
 
     Returns:
-        Vector 3D
+        mathutils.Vector: 3d Vector, that is, (r, g, b) color values.
+
+    References:
+        `class mathutils.Vector(seq)`_
+
+        `class bpy.types.Event(bpy_struct)`_
+
+    .. _class mathutils.Vector(seq):
+       https://docs.blender.org/api/current/mathutils.html#mathutils.Vector
+    .. _class bpy.types.Event(bpy_struct):
+       https://docs.blender.org/api/current/bpy.types.Event.html#bpy.types.Event
     """
 
     #  Get the context arguments
@@ -48,15 +59,16 @@ def mouse_raycast_to_scene(context, event) -> tuple:
     """Cast a ray from the mouse into the scene returning the ray hit data.
 
     Args:
-        context (bpy.types.Context): _description_
-        event (bpy.types.Event): _description_
+        context (bpy.types.Context): This parameter gives the option,
+            for example, to get a reference to the selected object.
+        event (bpy.types.Event): Window Manager Event.
 
     Returns:
         tuple: (result, location, normal, index, object, matrix)
 
     Raises:
         TypeError: If `context.view_layer` is given as the first argument
-            to `context.scene.ray_cast()`.
+            to ``context.scene.ray_cast()``.
 
     References:
         `Scene Ray Cast`_

@@ -8,6 +8,14 @@ from .. utility.ray import mouse_raycast_to_plane, mouse_raycast_to_scene
 
 
 class GEM_OP_Ray(bpy.types.Operator):
+    """This class creates a modal.
+
+    This is different from a standard operator. A modal is interactive, that is,
+    the user can move the mouse cursor and it affects the result in the
+    viewport.
+
+    """
+
     bl_idname = "gem.ray_caster"
     bl_label = "Raycaster"
     bl_description = "Raycaster Modal"
@@ -15,12 +23,65 @@ class GEM_OP_Ray(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
+        """This is going to be run before any instance of this class is made.
+
+        It makes sure the operator returns True or False and can run.
+
+        It is advisable to keep the method lite and not do any heavy
+        operations inside it.
+
+        Warning:
+            This method has to be called ``poll``.
+
+        Args:
+            context (bpy.context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+
+        Returns:
+            bool: True if there is a mesh object selected, False otherwise.
+
+        References:
+            `classmethod poll(context)`_
+
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _classmethod poll(context):
+           https://docs.blender.org/api/current/bpy.types.Operator.html#bpy.types.Operator.poll
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
+        """
+
         if context.active_object != None:
             if context.active_object.type == 'MESH':
                 return True
             return False
 
     def invoke(self, context, event):
+        """First method to run when an instance of this class is made.
+
+        Warning:
+            This method has to be called ``invoke``.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+            event (bpy.types.Event): Window Manager Event.
+
+        Returns:
+            set: Set containing only one string equals to "RUNNING_MODAL".
+
+        References:
+            `invoke(context, event)`_
+
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _invoke(context, event):
+           https://docs.blender.org/api/current/bpy.types.Operator.html#bpy.types.Operator.invoke
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
+        """
 
         self.obj = context.active_object
         self.scene_cast = True
@@ -32,6 +93,28 @@ class GEM_OP_Ray(bpy.types.Operator):
         return {"RUNNING_MODAL"}
 
     def modal(self, context, event):
+        """Runs after the ``invoke()`` method when an instance of this class is
+        made. It will run until it is finished.
+
+        Warning:
+            This method has to be called ``modal``.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+            event (bpy.types.Event): Window Manager Event.
+
+        Returns:
+            set: Only one of the following possible strings:
+            'PASS_THROUGH', 'CANCELLED' and 'RUNNING_MODAL'.
+
+        References:
+            `What do operator methods do? (poll, invoke, execute, draw & modal)`_
+
+        .. _What do operator methods do? (poll, invoke, execute, draw & modal):
+           https://blender.stackexchange.com/questions/19416/what-do-operator-methods-do-poll-invoke-execute-draw-modal
+
+        """
 
         # Free navigation
         if event.type == "MIDDLEMOUSE":
@@ -69,7 +152,12 @@ class GEM_OP_Ray(bpy.types.Operator):
         return {"RUNNING_MODAL"}
 
     def remove_shaders(self, context):
-        '''Remove shader handle.'''
+        """Remove shader handle.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         if self.draw_handle != None:
             self.draw_handle = bpy.types.SpaceView3D.draw_handler_remove(
@@ -77,6 +165,13 @@ class GEM_OP_Ray(bpy.types.Operator):
             context.area.tag_redraw()
 
     def safe_draw_shader_2d(self, context):
+        """Avoids having the text stuck in the viewport in case of an error in
+        the ``draw_shaders_2d()`` method.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         try:
             self.draw_shaders_2d(context)
@@ -86,6 +181,22 @@ class GEM_OP_Ray(bpy.types.Operator):
             self.remove_shaders(context)
 
     def draw_shaders_2d(self, context):
+        """Draws the shaders in 2D in the Blender interface.
+
+        When drawing text in the Bleder screen, it is necessary to draw the
+        rectangle in the background first and then the text inside it.
+
+        In order to render the background, it is necessary to know the
+        dimensions of the text. Some padding is going to be added to the width
+        and height of the text.
+
+        So, first we get the dimensions of the text, then we draw the background
+        and then the text inside that background.
+
+        Args:
+            context (bpy.types.Context): This parameter gives the option,
+                for example, to get a reference to the selected object.
+        """
 
         prefs = get_prefs()
 
